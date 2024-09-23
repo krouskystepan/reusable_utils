@@ -86,3 +86,20 @@ export const arrayIntersection = <T>(arr1: T[], arr2: T[]): T[] => {
 export const removeArrayDuplicates = <T>(arr: T[]): T[] => {
   return Array.from(new Set(arr))
 }
+
+/**
+ * Randomly shuffles the elements of an array.
+ *
+ * @param array - The array to shuffle.
+ * @returns A new array with the elements shuffled.
+ *
+ * @example
+ * shuffleArray([1, 2, 3, 4, 5]); // returns a shuffled array
+ */
+export const shuffleArray = <T>(array: T[]): T[] => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}

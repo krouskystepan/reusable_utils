@@ -5,6 +5,7 @@ import {
   arrayIntersection,
   arrayDifference,
   removeArrayDuplicates,
+  shuffleArray,
 } from '../utils/array'
 
 describe('getUniqueArrayElements', () => {
@@ -104,5 +105,18 @@ describe('arrayDifference', () => {
 
   it('should return an empty array if both arrays are empty', () => {
     expect(arrayDifference([], [])).toEqual([])
+  })
+})
+
+describe('shuffleArray', () => {
+  it('should return an array of the same length', () => {
+    const result = shuffleArray([1, 2, 3])
+    expect(result.length).toBe(3)
+  })
+
+  it('should contain the same elements', () => {
+    const original = [1, 2, 3]
+    const result = shuffleArray(original)
+    expect(result.sort()).toEqual(original.sort())
   })
 })

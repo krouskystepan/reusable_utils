@@ -1,4 +1,4 @@
-import { getDaysBetweenDates, getTimestamp, isWeekend } from '../utils/date'
+import { getDaysBetweenDates, getTimestamp } from '../utils/date'
 
 describe('getDaysBetweenDates', () => {
   test('should return 0 for same dates', () => {
@@ -75,19 +75,5 @@ describe('getTimestamp', () => {
       Date.now() - 1 * 365 * 24 * 60 * 60 * 1000
     )
     expect(getTimestamp(createdAtSingleYear)).toBe('1 year ago')
-  })
-})
-
-describe('isWeekend', () => {
-  it('should return true for Saturday', () => {
-    expect(isWeekend(new Date('2024-01-06'))).toBe(true)
-  })
-
-  it('should return true for Sunday', () => {
-    expect(isWeekend(new Date('2024-01-07'))).toBe(true)
-  })
-
-  it('should return false for a weekday', () => {
-    expect(isWeekend(new Date('2024-01-03'))).toBe(false)
   })
 })

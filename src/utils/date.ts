@@ -59,18 +59,3 @@ export const getTimestamp = (createdAt: Date): string => {
     return `${years} ${years === 1 ? 'year' : 'years'} ago`
   }
 }
-
-/**
- * Checks if a given date falls on a weekend (Saturday or Sunday).
- *
- * @param date - The date to check.
- * @returns True if the date is a Saturday or Sunday, false otherwise.
- *
- * @example
- * isWeekend(new Date('2024-01-06')) // returns true (Saturday)
- * isWeekend(new Date('2024-01-03')) // returns false (Wednesday)
- */
-export const isWeekend = (date: Date): boolean => {
-  const day = date.getDay()
-  return day === 0 || day === 6
-}
