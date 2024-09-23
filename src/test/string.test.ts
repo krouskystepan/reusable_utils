@@ -3,6 +3,7 @@ import {
   camelToKebabCase,
   kebabToCamelCase,
   capitalizeEachWord,
+  reverseString,
 } from '../utils/string'
 
 describe('capitalizeFirstLetter', () => {
@@ -64,5 +65,19 @@ describe('kebabToCamelCase', () => {
 
   test('should handle empty strings', () => {
     expect(kebabToCamelCase('')).toBe('')
+  })
+})
+
+describe('reverseString', () => {
+  it('should reverse a given string', () => {
+    expect(reverseString('hello')).toBe('olleh')
+  })
+
+  it('should reverse an empty string', () => {
+    expect(reverseString('')).toBe('')
+  })
+
+  it('should reverse a string with spaces', () => {
+    expect(reverseString('hello world')).toBe('dlrow olleh')
   })
 })

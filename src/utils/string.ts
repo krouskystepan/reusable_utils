@@ -49,3 +49,16 @@ export const camelToKebabCase = (str: string): string => {
 export const kebabToCamelCase = (str: string): string => {
   return str.replace(/-./g, (match) => match.charAt(1).toUpperCase())
 }
+
+/**
+ * Reverses the characters of a given string.
+ *
+ * @param value - The string to be reversed.
+ * @returns The reversed string.
+ *
+ * @example
+ * reverseString("hello") // returns "olleh"
+ */
+export const reverseString = (value: string): string => {
+  return value.split('').reverse().join('')
+}

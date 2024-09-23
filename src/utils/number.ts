@@ -85,3 +85,23 @@ export const formatPhoneNumber = (
 export const clamp = (num: number, min: number, max: number): number => {
   return Math.max(min, Math.min(max, num))
 }
+
+/**
+ * Formats a number as a currency string.
+ *
+ * @param value - The number to be formatted.
+ * @param locale - The locale string (default is 'en-US').
+ * @param currency - The currency code (default is 'USD').
+ * @returns The formatted currency string.
+ *
+ * @example
+ * toCurrency(1234.56) // returns "$1,234.56"
+ * toCurrency(1234.56, 'de-DE', 'EUR') // returns "1.234,56 €"
+ */
+export const toCurrency = (
+  value: number,
+  locale: string = 'en-US',
+  currency: string = 'USD'
+): string => {
+  return value.toLocaleString(locale, { style: 'currency', currency })
+}

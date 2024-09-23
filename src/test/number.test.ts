@@ -4,6 +4,7 @@ import {
   getRandomNumber,
   formatPhoneNumber,
   clamp,
+  toCurrency,
 } from '../utils/number'
 
 describe('getRandomNumber', () => {
@@ -131,5 +132,23 @@ describe('clamp', () => {
     expect(clamp(-5, -10, -1)).toBe(-5)
     expect(clamp(-15, -10, -1)).toBe(-10)
     expect(clamp(0, -10, -1)).toBe(-1)
+  })
+})
+
+describe('toCurrency', () => {
+  it('should format number as USD currency by default', () => {
+    expect(toCurrency(1234.56)).toBe('$1,234.56')
+  })
+
+  it('should format number as EUR currency', () => {
+    expect(toCurrency(1234.56, 'de-DE', 'EUR')).toBe('1.234,56 €')
+  })
+
+  it('should format number as JPY currency', () => {
+    expect(toCurrency(1234, 'ja-JP', 'JPY')).toBe('￥1,234')
+  })
+
+  it('should format number as CZK currency', () => {
+    expect(toCurrency(1234, 'cs-CZ', 'CZK')).toBe('1 234,00 Kč')
   })
 })

@@ -2,6 +2,9 @@ import {
   getUniqueArrayElements,
   flattenArray,
   chunkArray,
+  arrayIntersection,
+  arrayDifference,
+  removeArrayDuplicates,
 } from '../utils/array'
 
 describe('getUniqueArrayElements', () => {
@@ -59,5 +62,47 @@ describe('chunkArray', () => {
 
   test('should handle chunk size of 1', () => {
     expect(chunkArray([1, 2, 3], 1)).toEqual([[1], [2], [3]])
+  })
+})
+
+describe('arrayIntersection', () => {
+  it('should return common elements in two arrays', () => {
+    expect(arrayIntersection([1, 2, 3], [2, 3, 4])).toEqual([2, 3])
+  })
+
+  it('should return an empty array if no common elements', () => {
+    expect(arrayIntersection([1, 2, 3], [4, 5, 6])).toEqual([])
+  })
+
+  it('should return an empty array if either array is empty', () => {
+    expect(arrayIntersection([], [4, 5, 6])).toEqual([])
+  })
+})
+
+describe('removeArrayDuplicates', () => {
+  it('should remove duplicate elements from an array', () => {
+    expect(removeArrayDuplicates([1, 2, 2, 3, 3, 4])).toEqual([1, 2, 3, 4])
+  })
+
+  it('should return the same array if no duplicates are present', () => {
+    expect(removeArrayDuplicates([1, 2, 3, 4])).toEqual([1, 2, 3, 4])
+  })
+
+  it('should return an empty array if input is empty', () => {
+    expect(removeArrayDuplicates([])).toEqual([])
+  })
+})
+
+describe('arrayDifference', () => {
+  it('should return elements in the first array not in the second', () => {
+    expect(arrayDifference([1, 2, 3], [2, 3, 4])).toEqual([1])
+  })
+
+  it('should return the first array if no elements are in the second array', () => {
+    expect(arrayDifference([1, 2, 3], [4, 5, 6])).toEqual([1, 2, 3])
+  })
+
+  it('should return an empty array if both arrays are empty', () => {
+    expect(arrayDifference([], [])).toEqual([])
   })
 })

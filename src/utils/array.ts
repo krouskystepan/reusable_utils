@@ -45,3 +45,44 @@ export const chunkArray = <T>(arr: T[], size: number): T[][] => {
   }
   return result
 }
+
+/**
+ * Returns elements that are in the first array but not in the second.
+ *
+ * @param arr1 - The first array.
+ * @param arr2 - The second array.
+ * @returns An array of elements that are in arr1 but not in arr2.
+ *
+ * @example
+ * arrayDifference([1, 2, 3], [2, 3, 4]) // returns [1]
+ */
+export const arrayDifference = <T>(arr1: T[], arr2: T[]): T[] => {
+  return arr1.filter((item) => !arr2.includes(item))
+}
+
+/**
+ * Returns elements common to both arrays.
+ *
+ * @param arr1 - The first array.
+ * @param arr2 - The second array.
+ * @returns An array of elements common to both arr1 and arr2.
+ *
+ * @example
+ * arrayIntersection([1, 2, 3], [2, 3, 4]) // returns [2, 3]
+ */
+export const arrayIntersection = <T>(arr1: T[], arr2: T[]): T[] => {
+  return arr1.filter((item) => arr2.includes(item))
+}
+
+/**
+ * Removes duplicate elements from an array.
+ *
+ * @param arr - The array to remove duplicates from.
+ * @returns A new array with only unique elements.
+ *
+ * @example
+ * removeArrayDuplicates([1, 2, 2, 3, 3, 4]) // returns [1, 2, 3, 4]
+ */
+export const removeArrayDuplicates = <T>(arr: T[]): T[] => {
+  return Array.from(new Set(arr))
+}

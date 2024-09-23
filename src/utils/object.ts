@@ -22,9 +22,9 @@ export const deepCloneObject = <T>(obj: T): T => {
  * @returns A new object that combines the properties of both objects.
  *
  * @example
- * mergeObjects({ a: 1, b: { c: 2 } }, { b: { d: 3 } }) // returns { a: 1, b: { c: 2, d: 3 } }
+ * deepMergeObjects({ a: 1, b: { c: 2 } }, { b: { d: 3 } }) // returns { a: 1, b: { c: 2, d: 3 } }
  */
-export const mergeObjects = <
+export const deepMergeObjects = <
   T extends Record<string, any>,
   K extends Partial<Record<string, any>>
 >(
@@ -40,7 +40,7 @@ export const mergeObjects = <
       !Array.isArray(obj2[key])
     ) {
       // Recursively merge objects
-      ;(result as Record<string, any>)[key] = mergeObjects(
+      ;(result as Record<string, any>)[key] = deepMergeObjects(
         (result[key] as Record<string, any>) || {},
         obj2[key] as Record<string, any>
       )
