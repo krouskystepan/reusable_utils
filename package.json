@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "test": "jest",
-    "doc": "typedoc --plugin typedoc-github-theme",
-    "prepare": "npm run test && npm run doc"
+    "doc": "typedoc --plugin typedoc-github-theme"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +18,7 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typedoc": "^0.26.7",
-    "typedoc-github-theme": "^0.1.2"
+    "typedoc-github-theme": "^0.1.2",
+    "husky": "^8.0.0"
   }
 }
