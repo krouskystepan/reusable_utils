@@ -1,5 +1,12 @@
-// Usage: Deep clones an object
-// deepCloneObject({ a: 1, b: { c: 2 } }) becomes a new object { a: 1, b: { c: 2 } }.
+/**
+ * Deep clones an object.
+ *
+ * @param obj - The object to clone.
+ * @returns A new object that is a deep clone of the original object.
+ *
+ * @example
+ * deepCloneObject({ a: 1, b: { c: 2 } }) // returns a new object { a: 1, b: { c: 2 } }
+ */
 export const deepCloneObject = <T>(obj: T): T => {
   if (obj === null || obj === undefined) {
     return obj
@@ -7,8 +14,16 @@ export const deepCloneObject = <T>(obj: T): T => {
   return JSON.parse(JSON.stringify(obj))
 }
 
-// Usage: Merges two objects deeply
-// mergeObjects({ a: 1, b: { c: 2 } }, { b: { d: 3 } }) becomes { a: 1, b: { c: 2, d: 3 } }.
+/**
+ * Merges two objects deeply.
+ *
+ * @param obj1 - The first object to merge.
+ * @param obj2 - The second object to merge.
+ * @returns A new object that combines the properties of both objects.
+ *
+ * @example
+ * mergeObjects({ a: 1, b: { c: 2 } }, { b: { d: 3 } }) // returns { a: 1, b: { c: 2, d: 3 } }
+ */
 export const mergeObjects = <
   T extends Record<string, any>,
   K extends Partial<Record<string, any>>
@@ -30,7 +45,7 @@ export const mergeObjects = <
         obj2[key] as Record<string, any>
       )
     } else {
-      // If the value is an array or any other type, replace the existing value
+      // If the value is an array or any other type, add the value
       ;(result as Record<string, any>)[key] = obj2[key]
     }
   }

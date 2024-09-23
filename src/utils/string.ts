@@ -1,23 +1,51 @@
-// Usage: Capitalizes the first letter of a string and makes the rest of the string lowercase.
-// capitalizeFirstLetter('EXAMPLE') becomes 'Example'.
+/**
+ * Capitalizes the first letter of a string and makes the rest of the string lowercase.
+ *
+ * @param str - The string to capitalize.
+ * @returns A new string with the first letter capitalized and the rest in lowercase.
+ *
+ * @example
+ * capitalizeFirstLetter('EXAMPLE') // 'Example'
+ */
 export const capitalizeFirstLetter = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 }
 
-// Usage: Capitalizes the first letter of each word in a string
-// capitalizeEachWord('hello world') becomes 'Hello World'.
+/**
+ * Capitalizes the first letter of each word in a string.
+ *
+ * @param str - The string to capitalize.
+ * @returns A new string with the first letter of each word capitalized.
+ *
+ * @example
+ * capitalizeEachWord('hello world') // 'Hello World'
+ */
 export const capitalizeEachWord = (str: string): string => {
   return str.replace(/\b\w/g, (char) => char.toUpperCase())
 }
 
-// Usage: Converts a camelCase string to kebab-case
-// camelToKebabCase('camelCase') becomes 'camel-case'.
+/**
+ * Converts a camelCase string to kebab-case.
+ *
+ * @param str - The camelCase string to convert.
+ * @returns A kebab-case version of the input string.
+ *
+ * @example
+ * camelToKebabCase('camelCase') // 'camel-case'
+ */
 export const camelToKebabCase = (str: string): string => {
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
-// Usage: Converts a kebab-case string to camelCase
-// kebabToCamelCase('kebab-case') becomes 'kebabCase'.
+/**
+ * Converts a kebab-case string to camelCase.
+ *
+ * @param str - The kebab-case string to convert.
+ * @returns A camelCase version of the input string.
+ *
+ * @example
+ * kebabToCamelCase('kebab-case') // 'kebabCase'
+ */
 export const kebabToCamelCase = (str: string): string => {
   return str.replace(/-./g, (match) => match.charAt(1).toUpperCase())
 }

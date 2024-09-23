@@ -1,12 +1,27 @@
-// Usage: Calculates the days between two dates
-// getDaysBetweenDates(new Date('2024-09-01'), new Date('2024-09-23')) becomes 22.
+/**
+ * Calculates the number of days between two dates.
+ *
+ * @param startDate - The starting date.
+ * @param endDate - The ending date.
+ * @returns The number of days between the two dates.
+ *
+ * @example
+ * getDaysBetweenDates(new Date('2024-09-01'), new Date('2024-09-23')) // returns 22
+ */
 export const getDaysBetweenDates = (startDate: Date, endDate: Date): number => {
   const msPerDay = 24 * 60 * 60 * 1000
   return Math.round((endDate.getTime() - startDate.getTime()) / msPerDay)
 }
 
-// Usage: Calculates the relative time since a date
-// getTimestamp(new Date('2024-09-23')) becomes "1 week ago".
+/**
+ * Calculates the relative time since a given date.
+ *
+ * @param createdAt - The date to compare against the current date.
+ * @returns A string representing the time elapsed since the given date.
+ *
+ * @example
+ * getTimestamp(new Date('2024-09-23')) // returns "1 week ago"
+ */
 export const getTimestamp = (createdAt: Date): string => {
   const now = new Date()
   const timeDifference = now.getTime() - createdAt.getTime()
