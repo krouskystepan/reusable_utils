@@ -3,7 +3,8 @@ import {
   parseReadableStringToNumber,
   getRandomNumber,
   formatPhoneNumber,
-} from './numbers'
+  clamp,
+} from '../utils/number'
 
 describe('getRandomNumber', () => {
   test('should return a number between min and max inclusive', () => {
@@ -98,5 +99,37 @@ describe('formatPhoneNumber', () => {
 
   test('formats phone number with country code +1', () => {
     expect(formatPhoneNumber(1234567890, '+1')).toBe('+1 123 456 7890')
+  })
+})
+
+describe('clamp', () => {
+  test('should return the number when within the range', () => {
+    expect(clamp(5, 1, 10)).toBe(5)
+    expect(clamp(1, 1, 10)).toBe(1)
+    expect(clamp(10, 1, 10)).toBe(10)
+  })
+
+  test('should return the minimum when below the range', () => {
+    expect(clamp(0, 1, 10)).toBe(1)
+    expect(clamp(-5, 1, 10)).toBe(1)
+  })
+
+  test('should return the maximum when above the range', () => {
+    expect(clamp(15, 1, 10)).toBe(10)
+    expect(clamp(20, 1, 10)).toBe(10)
+  })
+
+  test('should return the min value when num equals min', () => {
+    expect(clamp(1, 1, 10)).toBe(1)
+  })
+
+  test('should return the max value when num equals max', () => {
+    expect(clamp(10, 1, 10)).toBe(10)
+  })
+
+  test('should handle negative ranges correctly', () => {
+    expect(clamp(-5, -10, -1)).toBe(-5)
+    expect(clamp(-15, -10, -1)).toBe(-10)
+    expect(clamp(0, -10, -1)).toBe(-1)
   })
 })

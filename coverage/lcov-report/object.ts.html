@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for numbers.ts</title>
+    <title>Code coverage report for object.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> numbers.ts</h1>
+        <h1><a href="index.html">All files</a> object.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/35</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/35</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -98,75 +98,84 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const getRandomNumber = (min: number, max: number): number =&gt; {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-&nbsp;
-export const formatNumberToReadableString = (number: number): string =&gt; {
-  if (number &gt;= 1_000_000) {
-    return (number / 1_000_000).toFixed(2) + 'M'
-  } else if (number &gt;= 1_000) {
-    return (number / 1_000).toFixed(2) + 'k'
-  } else {
-    return number.toString()
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Usage: Deep clones an object
+// deepCloneObject({ a: 1, b: { c: 2 } }) becomes a new object { a: 1, b: { c: 2 } }.
+export const deepCloneObject = &lt;T&gt;(obj: T): T =&gt; {
+  if (obj === null || obj === undefined) {
+    return obj
   }
+  return JSON.parse(JSON.stringify(obj))
 }
 &nbsp;
-export const parseReadableStringToNumber = (readableString: string): number =&gt; {
-  const normalizedString = readableString.toUpperCase()
-  if (normalizedString.endsWith('M')) {
-    return parseFloat(normalizedString.slice(0, -1)) * 1_000_000
-  } else if (normalizedString.endsWith('K')) {
-    return parseFloat(normalizedString.slice(0, -1)) * 1_000
-  } else {
-    return parseFloat(readableString)
+// Usage: Merges two objects deeply
+// mergeObjects({ a: 1, b: { c: 2 } }, { b: { d: 3 } }) becomes { a: 1, b: { c: 2, d: 3 } }.
+export const mergeObjects = &lt;
+  T extends Record&lt;string, any&gt;,
+  K extends Partial&lt;Record&lt;string, any&gt;&gt;
+&gt;(
+  obj1: T,
+  obj2: K
+): T &amp; K =&gt; {
+  const result = { ...obj1 } as T &amp; K
+&nbsp;
+  for (const key in obj2) {
+    if (
+      obj2[key] &amp;&amp;
+      typeof obj2[key] === 'object' &amp;&amp;
+      !Array.isArray(obj2[key])
+    ) {
+      // Recursively merge objects
+      ;(result as Record&lt;string, any&gt;)[key] = mergeObjects(
+        (result[key] as Record&lt;string, any&gt;) || {},
+        obj2[key] as Record&lt;string, any&gt;
+      )
+    } else {
+      // If the value is an array or any other type, replace the existing value
+      ;(result as Record&lt;string, any&gt;)[key] = obj2[key]
+    }
   }
-}
-&nbsp;
-export const formatPhoneNumber = (
-  number: number,
-  countryCode: string = ''
-): string =&gt; {
-  const cleaned = String(number).replace(/\D/g, '')
-&nbsp;
-  const formatted = cleaned.replace(/(\d{3})(\d{3})(\d+)/, '$1 $2 $3')
-&nbsp;
-  return countryCode ? `${countryCode} ${formatted}` : formatted
+  return result
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -175,7 +184,7 @@ export const formatPhoneNumber = (
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-09-22T15:47:32.404Z
+                at 2024-09-23T03:53:10.757Z
             </div>
         <script src="prettify.js"></script>
         <script>
