@@ -4,8 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "test": "jest",
-    "doc": "typedoc --plugin typedoc-github-theme"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -17,8 +16,6 @@
     "nodemon": "^3.1.7",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typedoc": "^0.26.7",
-    "typedoc-github-theme": "^0.1.2",
     "husky": "^8.0.0"
   }
 }

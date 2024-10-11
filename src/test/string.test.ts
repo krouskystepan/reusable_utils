@@ -4,6 +4,7 @@ import {
   kebabToCamelCase,
   capitalizeEachWord,
   reverseString,
+  countWords,
 } from '../utils/string'
 
 describe('capitalizeFirstLetter', () => {
@@ -79,5 +80,31 @@ describe('reverseString', () => {
 
   it('should reverse a string with spaces', () => {
     expect(reverseString('hello world')).toBe('dlrow olleh')
+  })
+})
+
+describe('countWords', () => {
+  it('should count words in a string with multiple words', () => {
+    expect(countWords('hello world')).toBe(2)
+  })
+
+  it('should count a single word', () => {
+    expect(countWords('hello')).toBe(1)
+  })
+
+  it('should return 0 for an empty string', () => {
+    expect(countWords('')).toBe(0)
+  })
+
+  it('should handle multiple spaces between words', () => {
+    expect(countWords('hello   world')).toBe(2)
+  })
+
+  it('should ignore leading and trailing spaces', () => {
+    expect(countWords('   hello world   ')).toBe(2)
+  })
+
+  it('should return 0 for a string with only spaces', () => {
+    expect(countWords('     ')).toBe(0)
   })
 })

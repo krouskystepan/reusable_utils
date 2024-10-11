@@ -62,3 +62,17 @@ export const kebabToCamelCase = (str: string): string => {
 export const reverseString = (value: string): string => {
   return value.split('').reverse().join('')
 }
+
+/**
+ * Counts the number of words in a given string.
+ *
+ * @param value - The string to count words in.
+ * @returns The word count.
+ *
+ * @example
+ * countWords("hello world") // returns 2
+ */
+export const countWords = (value: string): number => {
+  const trimmed = value.trim()
+  return trimmed ? trimmed.split(/\s+/).length : 0
+}
