@@ -5,6 +5,7 @@ import {
   formatPhoneNumber,
   clamp,
   toCurrency,
+  parseTimeToSeconds,
 } from '../utils/number'
 
 describe('getRandomNumber', () => {
@@ -150,5 +151,40 @@ describe('toCurrency', () => {
 
   it('should format number as CZK currency', () => {
     expect(toCurrency(1234, 'cs-CZ', 'CZK')).toBe('1 234,00 Kč')
+  })
+})
+
+describe('parseTimeToSeconds', () => {
+  it('should parse seconds correctly', () => {
+    expect(parseTimeToSeconds('5s')).toBe(5)
+  })
+
+  it('should parse minutes correctly', () => {
+    expect(parseTimeToSeconds('2m')).toBe(120)
+  })
+
+  it('should parse hours correctly', () => {
+    expect(parseTimeToSeconds('1h')).toBe(3600)
+  })
+
+  it('should parse days correctly', () => {
+    expect(parseTimeToSeconds('1d')).toBe(86400)
+  })
+
+  it('should handle mixed time formats', () => {
+    expect(parseTimeToSeconds('1h 30m')).toBe(5400)
+    expect(parseTimeToSeconds('2d 4h 30m')).toBe(189000)
+  })
+
+  it('should throw an error for invalid formats', () => {
+    expect(() => parseTimeToSeconds('invalid')).toThrow(
+      'Invalid format. Use a format like "5s", "2m", "7h", or "90d".'
+    )
+  })
+
+  it('should throw an error for unknown time units', () => {
+    expect(() => parseTimeToSeconds('10x')).toThrow(
+      'Invalid format. Use a format like "5s", "2m", "7h", or "90d".'
+    )
   })
 })

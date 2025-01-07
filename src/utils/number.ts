@@ -105,3 +105,53 @@ export const toCurrency = (
 ): string => {
   return value.toLocaleString(locale, { style: 'currency', currency })
 }
+
+/**
+ * Parses a time string into the total number of seconds.
+ *
+ * @param time - A string representing a time duration (e.g., "5s", "2m", "7h", or "90d").
+ * @returns The total duration in seconds.
+ *
+ * @throws Will throw an error if the input string format is invalid or contains unknown time units.
+ *
+ * @example
+ * parseTimeToSeconds("5s") // returns 5
+ * parseTimeToSeconds("2m") // returns 120
+ * parseTimeToSeconds("1h 30m") // returns 5400
+ */
+export const parseTimeToSeconds = (time: string): number => {
+  const regex = /(\d+)([smhd])/gi
+  let totalSeconds = 0
+
+  const sanitizedTime = time.replace(/\s+/g, '')
+
+  const matches = sanitizedTime.match(regex)
+
+  if (!matches) {
+    throw new Error(
+      'Invalid format. Use a format like "5s", "2m", "7h", or "90d".'
+    )
+  }
+
+  matches.forEach((match) => {
+    const value = parseInt(match.slice(0, -1), 10)
+    const unit = match.slice(-1).toLowerCase()
+
+    switch (unit) {
+      case 's':
+        totalSeconds += value
+        break
+      case 'm':
+        totalSeconds += value * 60
+        break
+      case 'h':
+        totalSeconds += value * 3600
+        break
+      case 'd':
+        totalSeconds += value * 86400
+        break
+    }
+  })
+
+  return totalSeconds
+}
