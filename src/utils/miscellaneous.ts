@@ -33,3 +33,23 @@ export const debounce = <T extends (...args: any[]) => any>(
     })
   }
 }
+
+/**
+ * Delays execution for a specified amount of time.
+ *
+ * @param ms - The number of milliseconds to wait.
+ * @returns A promise that resolves after the given time.
+ *
+ * @example
+ * await sleep(1000); // Waits for 1 second before continuing execution.
+ * @example
+ * const run = async () => {
+ *   console.log('Start');
+ *   await sleep(500);
+ *   console.log('After 500ms');
+ * };
+ * run();
+ */
+export const sleep = (ms: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
