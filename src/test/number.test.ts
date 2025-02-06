@@ -1,11 +1,9 @@
 import {
-  formatNumberToReadableString,
   parseReadableStringToNumber,
   getRandomNumber,
-  formatPhoneNumber,
   clamp,
-  toCurrency,
   parseTimeToSeconds,
+  getDaysBetweenDates,
 } from '../utils/number'
 
 describe('getRandomNumber', () => {
@@ -44,22 +42,6 @@ describe('getRandomNumber', () => {
   })
 })
 
-describe('fotmatNumberToReadableString', () => {
-  it('should format numbers in thousands correctly', () => {
-    expect(formatNumberToReadableString(1000)).toBe('1.00k')
-    expect(formatNumberToReadableString(1500)).toBe('1.50k')
-  })
-
-  it('should format numbers in millions correctly', () => {
-    expect(formatNumberToReadableString(1_000_000)).toBe('1.00M')
-    expect(formatNumberToReadableString(2_500_000)).toBe('2.50M')
-  })
-
-  it('should return the original number as a string if less than 1000', () => {
-    expect(formatNumberToReadableString(500)).toBe('500')
-  })
-})
-
 describe('parseReadableStringToNumber', () => {
   test('should parse string with M suffix correctly', () => {
     expect(parseReadableStringToNumber('2.5M')).toBe(2500000)
@@ -87,20 +69,6 @@ describe('parseReadableStringToNumber', () => {
   test('should handle invalid inputs gracefully', () => {
     expect(parseReadableStringToNumber('abc')).toBeNaN()
     expect(parseReadableStringToNumber('')).toBeNaN()
-  })
-})
-
-describe('formatPhoneNumber', () => {
-  test('formats phone number without country code', () => {
-    expect(formatPhoneNumber(777333111)).toBe('777 333 111')
-  })
-
-  test('formats phone number with country code +420', () => {
-    expect(formatPhoneNumber(777333111, '+420')).toBe('+420 777 333 111')
-  })
-
-  test('formats phone number with country code +1', () => {
-    expect(formatPhoneNumber(1234567890, '+1')).toBe('+1 123 456 7890')
   })
 })
 
@@ -136,24 +104,6 @@ describe('clamp', () => {
   })
 })
 
-describe('toCurrency', () => {
-  it('should format number as USD currency by default', () => {
-    expect(toCurrency(1234.56)).toBe('$1,234.56')
-  })
-
-  it('should format number as EUR currency', () => {
-    expect(toCurrency(1234.56, 'de-DE', 'EUR')).toBe('1.234,56 €')
-  })
-
-  it('should format number as JPY currency', () => {
-    expect(toCurrency(1234, 'ja-JP', 'JPY')).toBe('￥1,234')
-  })
-
-  it('should format number as CZK currency', () => {
-    expect(toCurrency(1234, 'cs-CZ', 'CZK')).toBe('1 234,00 Kč')
-  })
-})
-
 describe('parseTimeToSeconds', () => {
   it('should parse seconds correctly', () => {
     expect(parseTimeToSeconds('5s')).toBe(5)
@@ -186,5 +136,19 @@ describe('parseTimeToSeconds', () => {
     expect(() => parseTimeToSeconds('10x')).toThrow(
       'Invalid format. Use a format like "5s", "2m", "7h", or "90d".'
     )
+  })
+})
+
+describe('getDaysBetweenDates', () => {
+  test('should return 0 for same dates', () => {
+    expect(
+      getDaysBetweenDates(new Date('2024-09-23'), new Date('2024-09-23'))
+    ).toBe(0)
+  })
+
+  test('should return correct days between dates', () => {
+    expect(
+      getDaysBetweenDates(new Date('2024-09-01'), new Date('2024-09-23'))
+    ).toBe(22)
   })
 })

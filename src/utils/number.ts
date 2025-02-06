@@ -13,25 +13,6 @@ export const getRandomNumber = (min: number, max: number): number => {
 }
 
 /**
- * Converts a number into a human-readable string with appropriate units (k for thousand, M for million).
- *
- * @param number - The number to format.
- * @returns A formatted string representing the number in human-readable form.
- *
- * @example
- * formatNumberToReadableString(2_500_000) // returns '2.50M'
- */
-export const formatNumberToReadableString = (number: number): string => {
-  if (number >= 1_000_000) {
-    return (number / 1_000_000).toFixed(2) + 'M'
-  } else if (number >= 1_000) {
-    return (number / 1_000).toFixed(2) + 'k'
-  } else {
-    return number.toString()
-  }
-}
-
-/**
  * Converts a human-readable string with units (k or M) back to a number.
  *
  * @param readableString - The formatted string to convert back to a number.
@@ -52,25 +33,6 @@ export const parseReadableStringToNumber = (readableString: string): number => {
 }
 
 /**
- * Formats a phone number into a more readable format, optionally with a country code.
- *
- * @param number - The phone number to format, can be a number or a string.
- * @param countryCode - An optional country code to include in the formatted number.
- * @returns A formatted phone number string.
- *
- * @example
- * formatPhoneNumber('123456789012', '+1') // returns '+1 123 456 789 012'
- */
-export const formatPhoneNumber = (
-  number: number | string,
-  countryCode: string = ''
-): string => {
-  const cleaned = String(number).replace(/\D/g, '')
-  const formatted = cleaned.replace(/(\d{3})(\d{3})(\d+)/, '$1 $2 $3')
-  return countryCode ? `${countryCode} ${formatted}` : formatted
-}
-
-/**
  * Clamps a number between specified minimum and maximum values.
  *
  * @param num - The number to clamp.
@@ -84,26 +46,6 @@ export const formatPhoneNumber = (
  */
 export const clamp = (num: number, min: number, max: number): number => {
   return Math.max(min, Math.min(max, num))
-}
-
-/**
- * Formats a number as a currency string.
- *
- * @param value - The number to be formatted.
- * @param locale - The locale string (default is 'en-US').
- * @param currency - The currency code (default is 'USD').
- * @returns The formatted currency string.
- *
- * @example
- * toCurrency(1234.56) // returns "$1,234.56"
- * toCurrency(1234.56, 'de-DE', 'EUR') // returns "1.234,56 €"
- */
-export const toCurrency = (
-  value: number,
-  locale: string = 'en-US',
-  currency: string = 'USD'
-): string => {
-  return value.toLocaleString(locale, { style: 'currency', currency })
 }
 
 /**
@@ -154,4 +96,19 @@ export const parseTimeToSeconds = (time: string): number => {
   })
 
   return totalSeconds
+}
+
+/**
+ * Calculates the number of days between two dates.
+ *
+ * @param startDate - The starting date.
+ * @param endDate - The ending date.
+ * @returns The number of days between the two dates.
+ *
+ * @example
+ * getDaysBetweenDates(new Date('2024-09-01'), new Date('2024-09-23')) // returns 22
+ */
+export const getDaysBetweenDates = (startDate: Date, endDate: Date): number => {
+  const msPerDay = 24 * 60 * 60 * 1000
+  return Math.round((endDate.getTime() - startDate.getTime()) / msPerDay)
 }

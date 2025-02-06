@@ -5,6 +5,10 @@ import {
   capitalizeEachWord,
   reverseString,
   countWords,
+  getTimestamp,
+  formatNumberToReadableString,
+  formatPhoneNumber,
+  toCurrency,
 } from '../utils/string'
 
 describe('capitalizeFirstLetter', () => {
@@ -106,5 +110,117 @@ describe('countWords', () => {
 
   it('should return 0 for a string with only spaces', () => {
     expect(countWords('     ')).toBe(0)
+  })
+})
+
+describe('getTimestamp', () => {
+  test('should return "x seconds ago" for less than a minute', () => {
+    const createdAt = new Date(Date.now() - 30 * 1000)
+    expect(getTimestamp(createdAt)).toBe('30 seconds ago')
+
+    const createdAtSingleSecond = new Date(Date.now() - 1 * 1000)
+    expect(getTimestamp(createdAtSingleSecond)).toBe('1 second ago')
+  })
+
+  test('should return "x minutes ago" for less than an hour', () => {
+    const createdAt = new Date(Date.now() - 5 * 60 * 1000)
+    expect(getTimestamp(createdAt)).toBe('5 minutes ago')
+
+    const createdAtSingleMinute = new Date(Date.now() - 1 * 60 * 1000)
+    expect(getTimestamp(createdAtSingleMinute)).toBe('1 minute ago')
+  })
+
+  test('should return "x hours ago" for less than a day', () => {
+    const createdAt = new Date(Date.now() - 3 * 60 * 60 * 1000)
+    expect(getTimestamp(createdAt)).toBe('3 hours ago')
+
+    const createdAtSingleHour = new Date(Date.now() - 1 * 60 * 60 * 1000)
+    expect(getTimestamp(createdAtSingleHour)).toBe('1 hour ago')
+  })
+
+  test('should return "x days ago" for less than a week', () => {
+    const createdAt = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+    expect(getTimestamp(createdAt)).toBe('2 days ago')
+
+    const createdAtSingleDay = new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
+    expect(getTimestamp(createdAtSingleDay)).toBe('1 day ago')
+  })
+
+  test('should return "x weeks ago" for less than a month', () => {
+    const createdAt = new Date(Date.now() - 3 * 7 * 24 * 60 * 60 * 1000)
+    expect(getTimestamp(createdAt)).toBe('3 weeks ago')
+
+    const createdAtSingleWeek = new Date(
+      Date.now() - 1 * 7 * 24 * 60 * 60 * 1000
+    )
+    expect(getTimestamp(createdAtSingleWeek)).toBe('1 week ago')
+  })
+
+  test('should return "x months ago" for less than a year', () => {
+    const createdAt = new Date(Date.now() - 4 * 30 * 24 * 60 * 60 * 1000)
+    expect(getTimestamp(createdAt)).toBe('4 months ago')
+
+    const createdAtSingleMonth = new Date(
+      Date.now() - 1 * 30 * 24 * 60 * 60 * 1000
+    )
+    expect(getTimestamp(createdAtSingleMonth)).toBe('1 month ago')
+  })
+
+  test('should return "x years ago" for a year or more', () => {
+    const createdAt = new Date(Date.now() - 2 * 365 * 24 * 60 * 60 * 1000)
+    expect(getTimestamp(createdAt)).toBe('2 years ago')
+
+    const createdAtSingleYear = new Date(
+      Date.now() - 1 * 365 * 24 * 60 * 60 * 1000
+    )
+    expect(getTimestamp(createdAtSingleYear)).toBe('1 year ago')
+  })
+})
+
+describe('fotmatNumberToReadableString', () => {
+  it('should format numbers in thousands correctly', () => {
+    expect(formatNumberToReadableString(1000)).toBe('1.00k')
+    expect(formatNumberToReadableString(1500)).toBe('1.50k')
+  })
+
+  it('should format numbers in millions correctly', () => {
+    expect(formatNumberToReadableString(1_000_000)).toBe('1.00M')
+    expect(formatNumberToReadableString(2_500_000)).toBe('2.50M')
+  })
+
+  it('should return the original number as a string if less than 1000', () => {
+    expect(formatNumberToReadableString(500)).toBe('500')
+  })
+})
+
+describe('formatPhoneNumber', () => {
+  test('formats phone number without country code', () => {
+    expect(formatPhoneNumber(777333111)).toBe('777 333 111')
+  })
+
+  test('formats phone number with country code +420', () => {
+    expect(formatPhoneNumber(777333111, '+420')).toBe('+420 777 333 111')
+  })
+
+  test('formats phone number with country code +1', () => {
+    expect(formatPhoneNumber(1234567890, '+1')).toBe('+1 123 456 7890')
+  })
+})
+
+describe('toCurrency', () => {
+  it('should format number as USD currency by default', () => {
+    expect(toCurrency(1234.56)).toBe('$1,234.56')
+  })
+
+  it('should format number as EUR currency', () => {
+    expect(toCurrency(1234.56, 'de-DE', 'EUR')).toBe('1.234,56 €')
+  })
+
+  it('should format number as JPY currency', () => {
+    expect(toCurrency(1234, 'ja-JP', 'JPY')).toBe('￥1,234')
+  })
+
+  it('should format number as CZK currency', () => {
+    expect(toCurrency(1234, 'cs-CZ', 'CZK')).toBe('1 234,00 Kč')
   })
 })
