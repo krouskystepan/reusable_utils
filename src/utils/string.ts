@@ -181,3 +181,56 @@ export const toCurrency = (
 ): string => {
   return value.toLocaleString(locale, { style: 'currency', currency })
 }
+
+/**
+ * Formats the elapsed time since a given date into a readable string.
+ *
+ * - Returns seconds if the time difference is less than 60 seconds.
+ * - Returns only the two largest units otherwise (e.g., "2Y 3M", "5M 12d", "12d 6h", "4h 30m").
+ *
+ * @param pastTime - The past date to compare with the current time.
+ * @param suffixes - Customizable suffixes for time units (default: { Y: 'Y', M: 'M', d: 'd', h: 'h', m: 'm', s: 's' }).
+ * @returns The formatted elapsed time string.
+ *
+ * @example
+ * formatElapsedTime(new Date(Date.now() - 45 * 1000)) // returns "45s"
+ * formatElapsedTime(new Date(Date.now() - 5 * 60 * 1000)) // returns "5m"
+ * formatElapsedTime(new Date(Date.now() - 2 * 365 * 24 * 3600 * 1000)) // returns "2Y 3M"
+ */
+export const formatElapsedTime = (
+  pastTime: Date,
+  suffixes: {
+    Y?: string
+    M?: string
+    d?: string
+    h?: string
+    m?: string
+    s?: string
+  } = { Y: 'Y', M: 'M', d: 'd', h: 'h', m: 'm', s: 's' }
+): string => {
+  const now = new Date()
+  const diffMs = now.getTime() - pastTime.getTime()
+
+  const MS_IN_SECOND = 1000
+  const MS_IN_MINUTE = MS_IN_SECOND * 60
+  const MS_IN_HOUR = MS_IN_MINUTE * 60
+  const MS_IN_DAY = MS_IN_HOUR * 24
+  const MS_IN_MONTH = MS_IN_DAY * 30.44 // Average month (30.44 days)
+  const MS_IN_YEAR = MS_IN_DAY * 365.25 // Average year (including leap years)
+
+  const diffSeconds = Math.floor(diffMs / MS_IN_SECOND)
+
+  if (diffSeconds < 60) return `${diffSeconds}${suffixes.s}`
+
+  const years = Math.floor(diffMs / MS_IN_YEAR)
+  const months = Math.floor((diffMs % MS_IN_YEAR) / MS_IN_MONTH)
+  const days = Math.floor((diffMs % MS_IN_MONTH) / MS_IN_DAY)
+  const hours = Math.floor((diffMs % MS_IN_DAY) / MS_IN_HOUR)
+  const minutes = Math.floor((diffMs % MS_IN_HOUR) / MS_IN_MINUTE)
+
+  if (years > 0) return `${years}${suffixes.Y} ${months}${suffixes.M}`.trim()
+  if (months > 0) return `${months}${suffixes.M} ${days}${suffixes.d}`.trim()
+  if (days > 0) return `${days}${suffixes.d} ${hours}${suffixes.h}`.trim()
+  if (hours > 0) return `${hours}${suffixes.h} ${minutes}${suffixes.m}`.trim()
+  return `${minutes}${suffixes.m}`
+}

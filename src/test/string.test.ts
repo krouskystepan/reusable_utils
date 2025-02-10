@@ -9,6 +9,7 @@ import {
   formatNumberToReadableString,
   formatPhoneNumber,
   toCurrency,
+  formatElapsedTime,
 } from '../utils/string'
 
 describe('capitalizeFirstLetter', () => {
@@ -222,5 +223,53 @@ describe('toCurrency', () => {
 
   it('should format number as CZK currency', () => {
     expect(toCurrency(1234, 'cs-CZ', 'CZK')).toBe('1 234,00 Kč')
+  })
+})
+
+describe('formatElapsedTime', () => {
+  it('should return seconds when below 60s', () => {
+    expect(formatElapsedTime(new Date(Date.now() - 45 * 1000))).toBe('45s')
+  })
+
+  it('should return only minutes when below 1h', () => {
+    expect(formatElapsedTime(new Date(Date.now() - 5 * 60 * 1000))).toBe('5m')
+  })
+
+  it('should return hours and minutes when below 1 day', () => {
+    expect(
+      formatElapsedTime(new Date(Date.now() - (3 * 3600 + 15 * 60) * 1000))
+    ).toBe('3h 15m')
+  })
+
+  it('should return days and hours when below 1 month', () => {
+    expect(
+      formatElapsedTime(new Date(Date.now() - (5 * 86400 + 12 * 3600) * 1000))
+    ).toBe('5d 12h')
+  })
+
+  it('should return months and days when below 1 year', () => {
+    expect(
+      formatElapsedTime(
+        new Date(Date.now() - (5 * 30.44 * 86400 + 12 * 86400) * 1000)
+      )
+    ).toBe('5M 12d')
+  })
+
+  it('should return years and months when above 1 year', () => {
+    expect(
+      formatElapsedTime(
+        new Date(Date.now() - (2 * 365.25 * 86400 + 3 * 30.44 * 86400) * 1000)
+      )
+    ).toBe('2Y 3M')
+  })
+
+  it('should allow custom suffixes', () => {
+    expect(
+      formatElapsedTime(new Date(Date.now() - (3 * 3600 + 15 * 60) * 1000), {
+        h: ' hours',
+        m: ' minutes',
+        s: ' seconds',
+      })
+    ).toBe('3 hours 15 minutes')
   })
 })
