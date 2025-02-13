@@ -126,21 +126,30 @@ export const getTimestamp = (createdAt: Date): string => {
 
 /**
  * Converts a number into a human-readable string with appropriate units (k for thousand, M for million).
+ * Handles both positive and negative numbers.
  *
  * @param number - The number to format.
  * @returns A formatted string representing the number in human-readable form.
  *
  * @example
  * formatNumberToReadableString(2_500_000) // returns '2.50M'
+ * formatNumberToReadableString(-1500) // returns '-1.50k'
  */
 export const formatNumberToReadableString = (number: number): string => {
-  if (number >= 1_000_000) {
-    return (number / 1_000_000).toFixed(2) + 'M'
-  } else if (number >= 1_000) {
-    return (number / 1_000).toFixed(2) + 'k'
+  const absNumber = Math.abs(number)
+
+  let formatted: string
+  if (absNumber >= 1_000_000) {
+    formatted =
+      (absNumber / 1_000_000).toFixed(absNumber % 1_000_000 === 0 ? 0 : 2) + 'M'
+  } else if (absNumber >= 1_000) {
+    formatted =
+      (absNumber / 1_000).toFixed(absNumber % 1_000 === 0 ? 0 : 2) + 'k'
   } else {
-    return number.toString()
+    formatted = absNumber.toString()
   }
+
+  return number < 0 ? `-${formatted}` : formatted
 }
 
 /**

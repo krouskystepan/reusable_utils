@@ -178,19 +178,32 @@ describe('getTimestamp', () => {
   })
 })
 
-describe('fotmatNumberToReadableString', () => {
+describe('formatNumberToReadableString', () => {
   it('should format numbers in thousands correctly', () => {
-    expect(formatNumberToReadableString(1000)).toBe('1.00k')
+    expect(formatNumberToReadableString(1000)).toBe('1k')
     expect(formatNumberToReadableString(1500)).toBe('1.50k')
+    expect(formatNumberToReadableString(2000)).toBe('2k')
   })
 
   it('should format numbers in millions correctly', () => {
-    expect(formatNumberToReadableString(1_000_000)).toBe('1.00M')
+    expect(formatNumberToReadableString(1_000_000)).toBe('1M')
     expect(formatNumberToReadableString(2_500_000)).toBe('2.50M')
   })
 
   it('should return the original number as a string if less than 1000', () => {
     expect(formatNumberToReadableString(500)).toBe('500')
+    expect(formatNumberToReadableString(999)).toBe('999')
+  })
+
+  it('should handle negative numbers correctly', () => {
+    expect(formatNumberToReadableString(-1000)).toBe('-1k')
+    expect(formatNumberToReadableString(-1500)).toBe('-1.50k')
+    expect(formatNumberToReadableString(-2_500_000)).toBe('-2.50M')
+  })
+
+  it('should handle edge cases correctly', () => {
+    expect(formatNumberToReadableString(0)).toBe('0')
+    expect(formatNumberToReadableString(-999)).toBe('-999')
   })
 })
 
