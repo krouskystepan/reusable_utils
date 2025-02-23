@@ -153,6 +153,26 @@ export const formatNumberToReadableString = (number: number): string => {
 }
 
 /**
+ * Formats a number by inserting a specified separator as thousand separators.
+ * Handles both positive and negative numbers.
+ *
+ * @param num - The number to format.
+ * @param separator - The separator to use (default is a space).
+ * @returns A formatted string with the chosen separator as thousand separators.
+ *
+ * @example
+ * formatNumberWithSpaces(2500000) // returns '2 500 000'
+ * formatNumberWithSpaces(2500000, '.') // returns '2.500.000'
+ * formatNumberWithSpaces(-1500, ',') // returns '-1,500'
+ */
+export const formatNumberWithSpaces = (
+  num: number,
+  separator: string = ' '
+): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator)
+}
+
+/**
  * Formats a phone number into a more readable format, optionally with a country code.
  *
  * @param number - The phone number to format, can be a number or a string.

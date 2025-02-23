@@ -10,6 +10,7 @@ import {
   formatPhoneNumber,
   toCurrency,
   formatElapsedTime,
+  formatNumberWithSpaces,
 } from '../utils/string'
 
 describe('capitalizeFirstLetter', () => {
@@ -204,6 +205,29 @@ describe('formatNumberToReadableString', () => {
   it('should handle edge cases correctly', () => {
     expect(formatNumberToReadableString(0)).toBe('0')
     expect(formatNumberToReadableString(-999)).toBe('-999')
+  })
+})
+
+describe('formatNumberWithSpaces', () => {
+  test('formats positive numbers correctly with default separator', () => {
+    expect(formatNumberWithSpaces(2500000)).toBe('2 500 000')
+    expect(formatNumberWithSpaces(1500)).toBe('1 500')
+  })
+
+  test('formats negative numbers correctly with default separator', () => {
+    expect(formatNumberWithSpaces(-2500000)).toBe('-2 500 000')
+    expect(formatNumberWithSpaces(-1500)).toBe('-1 500')
+  })
+
+  test('formats numbers with custom separator', () => {
+    expect(formatNumberWithSpaces(2500000, '.')).toBe('2.500.000')
+    expect(formatNumberWithSpaces(1500, ',')).toBe('1,500')
+    expect(formatNumberWithSpaces(-1500, '.')).toBe('-1.500')
+  })
+
+  test('formats small numbers correctly', () => {
+    expect(formatNumberWithSpaces(999)).toBe('999')
+    expect(formatNumberWithSpaces(-999)).toBe('-999')
   })
 })
 
