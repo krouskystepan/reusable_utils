@@ -23,6 +23,11 @@ export const getRandomNumber = (min: number, max: number): number => {
  */
 export const parseReadableStringToNumber = (readableString: string): number => {
   const normalizedString = readableString.toUpperCase()
+
+  if (!/^[-]?[0-9.]+[BMK]?$/.test(normalizedString)) {
+    return NaN
+  }
+
   if (normalizedString.endsWith('M')) {
     return parseFloat(normalizedString.slice(0, -1)) * 1_000_000
   } else if (normalizedString.endsWith('K')) {

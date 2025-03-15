@@ -49,10 +49,22 @@ describe('parseReadableStringToNumber', () => {
     expect(parseReadableStringToNumber('0.5M')).toBe(500000)
   })
 
+  test('should parse negative string with M suffix correctly', () => {
+    expect(parseReadableStringToNumber('-2.5M')).toBe(-2500000)
+    expect(parseReadableStringToNumber('-1M')).toBe(-1000000)
+    expect(parseReadableStringToNumber('-0.5M')).toBe(-500000)
+  })
+
   test('should parse string with K suffix correctly', () => {
     expect(parseReadableStringToNumber('2.5K')).toBe(2500)
     expect(parseReadableStringToNumber('1K')).toBe(1000)
     expect(parseReadableStringToNumber('0.1K')).toBe(100)
+  })
+
+  test('should parse negative string with K suffix correctly', () => {
+    expect(parseReadableStringToNumber('-2.5K')).toBe(-2500)
+    expect(parseReadableStringToNumber('-1K')).toBe(-1000)
+    expect(parseReadableStringToNumber('-0.1K')).toBe(-100)
   })
 
   test('should parse numeric strings without suffix correctly', () => {
@@ -67,7 +79,9 @@ describe('parseReadableStringToNumber', () => {
   })
 
   test('should handle invalid inputs gracefully', () => {
-    expect(parseReadableStringToNumber('abc')).toBeNaN()
+    expect(parseReadableStringToNumber('10k jjj')).toBeNaN()
+    expect(parseReadableStringToNumber('10km')).toBeNaN()
+    expect(parseReadableStringToNumber('10km m')).toBeNaN()
     expect(parseReadableStringToNumber('')).toBeNaN()
   })
 })
