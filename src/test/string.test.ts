@@ -11,6 +11,7 @@ import {
   toCurrency,
   formatElapsedTime,
   formatNumberWithSpaces,
+  calculateUptime,
 } from '../utils/string'
 
 describe('capitalizeFirstLetter', () => {
@@ -308,5 +309,63 @@ describe('formatElapsedTime', () => {
         s: ' seconds',
       })
     ).toBe('3 hours 15 minutes')
+  })
+})
+
+describe('calculateUptime', () => {
+  test('should return correct singular form for 1 second', () => {
+    const startTime = new Date(new Date().getTime() - 1000).toISOString()
+    const result = calculateUptime(startTime)
+    expect(result).toBe('1 second')
+  })
+
+  test('should return correct plural form for seconds', () => {
+    const startTime = new Date(new Date().getTime() - 5000).toISOString()
+    const result = calculateUptime(startTime)
+    expect(result).toBe('5 seconds')
+  })
+
+  test('should return correct singular form for 1 minute', () => {
+    const startTime = new Date(new Date().getTime() - 60 * 1000).toISOString()
+    const result = calculateUptime(startTime)
+    expect(result).toBe('1 minute')
+  })
+
+  test('should return correct plural form for multiple minutes', () => {
+    const startTime = new Date(
+      new Date().getTime() - 5 * 60 * 1000
+    ).toISOString()
+    const result = calculateUptime(startTime)
+    expect(result).toBe('5 minutes')
+  })
+
+  test('should return correct singular form for 1 hour', () => {
+    const startTime = new Date(new Date().getTime() - 3600 * 1000).toISOString()
+    const result = calculateUptime(startTime)
+    expect(result).toBe('1 hour')
+  })
+
+  test('should return correct plural form for multiple hours', () => {
+    const startTime = new Date(
+      new Date().getTime() - 5 * 3600 * 1000
+    ).toISOString()
+    const result = calculateUptime(startTime)
+    expect(result).toBe('5 hours')
+  })
+
+  test('should return correct singular form for 1 day', () => {
+    const startTime = new Date(
+      new Date().getTime() - 3600 * 1000 * 24
+    ).toISOString()
+    const result = calculateUptime(startTime)
+    expect(result).toBe('1 day')
+  })
+
+  test('should return correct plural form for multiple days', () => {
+    const startTime = new Date(
+      new Date().getTime() - 5 * 3600 * 1000 * 24
+    ).toISOString()
+    const result = calculateUptime(startTime)
+    expect(result).toBe('5 days')
   })
 })
