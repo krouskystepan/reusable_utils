@@ -4,6 +4,9 @@ import {
   clamp,
   parseTimeToSeconds,
   getDaysBetweenDates,
+  countWords,
+  sum,
+  average,
 } from '../utils/number'
 
 describe('getRandomNumber', () => {
@@ -164,5 +167,79 @@ describe('getDaysBetweenDates', () => {
     expect(
       getDaysBetweenDates(new Date('2024-09-01'), new Date('2024-09-23'))
     ).toBe(22)
+  })
+})
+
+describe('countWords', () => {
+  it('should count words in a string with multiple words', () => {
+    expect(countWords('hello world')).toBe(2)
+  })
+
+  it('should count a single word', () => {
+    expect(countWords('hello')).toBe(1)
+  })
+
+  it('should return 0 for an empty string', () => {
+    expect(countWords('')).toBe(0)
+  })
+
+  it('should handle multiple spaces between words', () => {
+    expect(countWords('hello   world')).toBe(2)
+  })
+
+  it('should ignore leading and trailing spaces', () => {
+    expect(countWords('   hello world   ')).toBe(2)
+  })
+
+  it('should return 0 for a string with only spaces', () => {
+    expect(countWords('     ')).toBe(0)
+  })
+})
+
+describe('sum', () => {
+  it('should return the sum of positive numbers', () => {
+    expect(sum([1, 2, 3])).toBe(6)
+  })
+
+  it('should return the sum of negative numbers', () => {
+    expect(sum([-1, -2, -3])).toBe(-6)
+  })
+
+  it('should return 0 for an empty array', () => {
+    expect(sum([])).toBe(0)
+  })
+
+  it('should handle a single element array', () => {
+    expect(sum([5])).toBe(5)
+  })
+
+  it('should handle decimal numbers', () => {
+    expect(sum([1.5, 2.5])).toBe(4)
+  })
+})
+
+describe('average', () => {
+  it('should return the average of positive numbers', () => {
+    expect(average([1, 2, 3])).toBe(2)
+  })
+
+  it('should return the average of negative numbers', () => {
+    expect(average([-1, -2, -3])).toBe(-2)
+  })
+
+  it('should return 0 for an empty array', () => {
+    expect(average([])).toBe(0)
+  })
+
+  it('should handle a single element array', () => {
+    expect(average([5])).toBe(5)
+  })
+
+  it('should handle decimal numbers input', () => {
+    expect(average([1.5, 2.5, 3.5])).toBe(2.5)
+  })
+
+  it('should handle decimal numbers output', () => {
+    expect(average([1.5, 2.5])).toBe(2)
   })
 })

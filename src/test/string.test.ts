@@ -4,13 +4,13 @@ import {
   kebabToCamelCase,
   capitalizeEachWord,
   reverseString,
-  countWords,
   getTimestamp,
   formatNumberToReadableString,
   formatPhoneNumber,
   toCurrency,
   formatElapsedTime,
   formatNumberWithSpaces,
+  toOrdinal,
 } from '../utils/string'
 
 describe('capitalizeFirstLetter', () => {
@@ -86,32 +86,6 @@ describe('reverseString', () => {
 
   it('should reverse a string with spaces', () => {
     expect(reverseString('hello world')).toBe('dlrow olleh')
-  })
-})
-
-describe('countWords', () => {
-  it('should count words in a string with multiple words', () => {
-    expect(countWords('hello world')).toBe(2)
-  })
-
-  it('should count a single word', () => {
-    expect(countWords('hello')).toBe(1)
-  })
-
-  it('should return 0 for an empty string', () => {
-    expect(countWords('')).toBe(0)
-  })
-
-  it('should handle multiple spaces between words', () => {
-    expect(countWords('hello   world')).toBe(2)
-  })
-
-  it('should ignore leading and trailing spaces', () => {
-    expect(countWords('   hello world   ')).toBe(2)
-  })
-
-  it('should return 0 for a string with only spaces', () => {
-    expect(countWords('     ')).toBe(0)
   })
 })
 
@@ -308,5 +282,36 @@ describe('formatElapsedTime', () => {
         s: ' seconds',
       })
     ).toBe('3 hours 15 minutes')
+  })
+})
+
+describe('toOrdinal', () => {
+  it('should return "1st" for 1', () => {
+    expect(toOrdinal(1)).toBe('1st')
+  })
+
+  it('should return "2nd" for 2', () => {
+    expect(toOrdinal(2)).toBe('2nd')
+  })
+
+  it('should return "3rd" for 3', () => {
+    expect(toOrdinal(3)).toBe('3rd')
+  })
+
+  it('should return "4th" for 4', () => {
+    expect(toOrdinal(4)).toBe('4th')
+  })
+
+  it('should handle teen exceptions correctly (11th, 12th, 13th)', () => {
+    expect(toOrdinal(11)).toBe('11th')
+    expect(toOrdinal(12)).toBe('12th')
+    expect(toOrdinal(13)).toBe('13th')
+  })
+
+  it('should return "21st", "22nd", "23rd", "24th"', () => {
+    expect(toOrdinal(21)).toBe('21st')
+    expect(toOrdinal(22)).toBe('22nd')
+    expect(toOrdinal(23)).toBe('23rd')
+    expect(toOrdinal(24)).toBe('24th')
   })
 })

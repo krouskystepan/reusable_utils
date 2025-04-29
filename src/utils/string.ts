@@ -64,20 +64,6 @@ export const reverseString = (value: string): string => {
 }
 
 /**
- * Counts the number of words in a given string.
- *
- * @param value - The string to count words in.
- * @returns The word count.
- *
- * @example
- * countWords("hello world") // returns 2
- */
-export const countWords = (value: string): number => {
-  const trimmed = value.trim()
-  return trimmed ? trimmed.split(/\s+/).length : 0
-}
-
-/**
  * Calculates the relative time since a given date.
  *
  * @param createdAt - The date to compare against the current date.
@@ -262,4 +248,19 @@ export const formatElapsedTime = (
   if (days > 0) return `${days}${suffixes.d} ${hours}${suffixes.h}`.trim()
   if (hours > 0) return `${hours}${suffixes.h} ${minutes}${suffixes.m}`.trim()
   return `${minutes}${suffixes.m}`
+}
+
+/**
+ * Converts a number to its ordinal representation (e.g. 1 -> '1st').
+ *
+ * @param n - The number to convert.
+ * @returns The number with its ordinal suffix.
+ *
+ * @example
+ * toOrdinal(1) // '1st'
+ */
+export const toOrdinal = (n: number): string => {
+  const suffix = ['th', 'st', 'nd', 'rd']
+  const v = n % 100
+  return n + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
 }

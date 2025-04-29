@@ -117,3 +117,43 @@ export const getDaysBetweenDates = (startDate: Date, endDate: Date): number => {
   const msPerDay = 24 * 60 * 60 * 1000
   return Math.round((endDate.getTime() - startDate.getTime()) / msPerDay)
 }
+
+/**
+ * Counts the number of words in a given string.
+ *
+ * @param value - The string to count words in.
+ * @returns The word count.
+ *
+ * @example
+ * countWords("hello world") // returns 2
+ */
+export const countWords = (value: string): number => {
+  const trimmed = value.trim()
+  return trimmed ? trimmed.split(/\s+/).length : 0
+}
+
+/**
+ * Calculates the sum of an array of numbers.
+ *
+ * @param numbers - Array of numbers.
+ * @returns The total sum. Returns 0 for an empty array.
+ *
+ * @example
+ * sum([1, 2, 3]) // returns 6
+ */
+export const sum = (numbers: number[]): number =>
+  numbers.reduce((acc, val) => acc + val, 0)
+
+/**
+ * Calculates the average of an array of numbers.
+ *
+ * @param numbers - Array of numbers.
+ * @returns The average. Returns 0 for an empty array.
+ *
+ * @example
+ * average([1, 2, 3]) // returns 2
+ */
+export const average = (numbers: number[]): number => {
+  if (numbers.length === 0) return 0
+  return sum(numbers) / numbers.length
+}
